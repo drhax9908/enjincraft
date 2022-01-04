@@ -8,7 +8,7 @@ buildscript {
             'placeholderApi'  : '2.10.9',
             'sqlite'          : '3.28.0',
             'sentry'          : '1.7.27',
-            'nbtapi'          : '2.8.0'
+            'nbtapi'          : '2.9.0'
     ]
 
     ext.deps = [
@@ -34,11 +34,8 @@ buildscript {
 }
 
 plugins {
-    id 'io.freefair.lombok' version '5.3.0'
+    id 'io.freefair.lombok' version '6.3.0'
     id 'com.github.johnrengelman.shadow' version '6.1.0'
-    id 'com.bmuschko.nexus' version '2.3.1'
-    id 'io.codearte.nexus-staging' version '0.21.0'
-    id 'org.ajoberstar.git-publish' version '2.1.1'
 }
 
 allprojects {
@@ -50,15 +47,15 @@ allprojects {
         mavenCentral()
         maven { url 'https://oss.sonatype.org/content/groups/public/' }
         maven { url "https://jitpack.io" }
+	    maven { url "https://plugins.gradle.org/m2/" }
     }
 }
 
 subprojects {
     apply plugin: 'java'
     apply plugin: 'java-library'
-    apply plugin: 'maven'
+    apply plugin: 'maven-publish'
     apply plugin: 'io.freefair.lombok'
-    apply plugin: 'com.bmuschko.nexus'
     apply plugin: 'com.github.johnrengelman.shadow'
 
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -95,36 +92,11 @@ subprojects {
         archives shadowJar
     }
 
-    extraArchive {
-        sources = false
-        javadoc = false
-        tests = false
-    }
 
-    nexus {
-        sign = false
-        repositoryUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-        snapshotRepositoryUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
-    }
-
-    gitPublish {
-        repoUri = 'git@github.com:enjin/enjincraft.git'
-        branch = 'gh-pages'
-        contents {
-            from(javadoc) {
-                into '/'
-            }
-        }
-        commitMessage = "Publishing documentation for version ${version}."
-    }
 }
 
-nexusStaging {
-    username = local.getProperty('nexusUsername')
-    password = local.getProperty('nexusPassword')
-}
 
 wrapper {
-    gradleVersion = '6.8.1'
+    gradleVersion = '7.3.3'
     distributionType = Wrapper.DistributionType.ALL
 }

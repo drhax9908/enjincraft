@@ -6,7 +6,10 @@ jar.archiveBaseName = 'EnjinCraft-Spigot'
 
 repositories {
     maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
-    maven { url 'http://repo.extendedclip.com/content/repositories/placeholderapi/' }
+    maven {
+		url 'http://repo.extendedclip.com/content/repositories/placeholderapi/'
+		allowInsecureProtocol = true
+		}
     maven { url 'https://repo.codemc.org/repository/maven-public/' }
 }
 
@@ -21,7 +24,7 @@ dependencies {
     implementation deps.nbtapi
     implementation deps.kyoriText
     implementation deps.kyoriTextAdapterBukkit
-
+	
     api (deps.enjinSdk) {
         exclude module: "gson"
     }
