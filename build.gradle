@@ -1,6 +1,6 @@
 buildscript {
     ext.versions = [
-            'minecraftCommons': '1.0.0',
+            'minecraftCommons': '1.0.0-fixed',
             'enjinSdk'        : '1.0.4',
             'kyoriText'       : '4.1.1',
             'kyoriTextAdapter': '4.0.0-SNAPSHOT',
@@ -46,6 +46,13 @@ allprojects {
         mavenLocal()
         mavenCentral()
         maven { url 'https://oss.sonatype.org/content/groups/public/' }
+	maven {
+            url = uri("https://maven.pkg.github.com/drhax9908/Enjin-Minecraft-Commons")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
         maven { url "https://jitpack.io" }
 	    maven { url "https://plugins.gradle.org/m2/" }
     }
