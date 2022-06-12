@@ -1,14 +1,14 @@
 buildscript {
     ext.versions = [
             'minecraftCommons': '1.0.0-fixed',
-            'enjinSdk'        : '1.0.7',
+            'enjinSdk'        : '1.0.9',
             'kyoriText'       : '4.1.1',
             'kyoriTextAdapter': '4.0.1',
             'spigot'          : '1.13.2-R0.1-SNAPSHOT',
             'placeholderApi'  : '2.10.9',
             'sqlite'          : '3.28.0',
             'sentry'          : '1.7.27',
-            'nbtapi'          : '2.9.2'
+            'nbtapi'          : '2.10.0'
     ]
 
     ext.deps = [
@@ -40,7 +40,7 @@ plugins {
 
 allprojects {
     group = 'com.enjin.enjincraft'
-    version = '1.1.2-test'
+    version = '1.1.4-test'
 
     repositories {
         mavenLocal()
